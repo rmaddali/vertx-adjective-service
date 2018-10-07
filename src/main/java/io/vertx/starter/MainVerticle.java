@@ -37,6 +37,7 @@ public class MainVerticle extends AbstractVerticle {
       
       router.get("/api/adjective").handler(this::getAdjective);
       router.route("/api/adjective*").handler(BodyHandler.create());
+	  router.get("/health").handler(rc -> rc.response().end("status.:.UP"));
       
 
       ConfigRetriever retriever = ConfigRetriever.create(vertx);
