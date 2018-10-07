@@ -36,5 +36,18 @@ public class MainVerticleTest {
       });
     });
   }
+  @Test
+  public void testThatTheServerIsStartedAndReturnsAnAdjective(TestContext tc) {
+    Async async = tc.async();
+    vertx.createHttpClient().getNow(8080, "localhost", "/api/adjective", response -> {
+      tc.assertEquals(response.statusCode(), 200);
+      response.bodyHandler(body -> {
+        tc.assertTrue(body.length() > 0);
+        async.complete();
+      });
+    });
+  }
+  
+  
 
 }
